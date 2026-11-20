@@ -1,0 +1,29 @@
+/* === Overview (geser 3 jari ke atas) dipercantik (cinnamon-macos-style) === */
+.workspace-overview-background-shade {
+  background-color: rgba(7, 11, 17, 0.78);
+}
+
+.window-caption {
+  background-color: rgba(14, 18, 24, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #e6edf3;
+  border-radius: 16px;
+  font-size: 10.5pt;
+  font-weight: 500;
+  padding: 6px 16px;
+  spacing: 8px;
+  -cinnamon-caption-spacing: 6px;
+}
+
+.window-caption#selected {
+  background-color: #6fcf97;
+  border: 1px solid #6fcf97;
+  color: #0b1410;
+  border-radius: 16px;
+}
+
+.window-border {
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  box-shadow: 0 0 28px rgba(111, 207, 151, 0.55);
+}

@@ -1,0 +1,14 @@
+# Jangan pernah ikutkan berkas pribadi ke repositori
+.env
+*.pem
+*.key
+id_rsa*
+*.kdbx
+*.sqlite
+.bash_history
+credentials*
+*.log
+__pycache__/
+*.pyc
+# Cadangan hasil pemasangan ada di rumah pengguna, bukan di repositori; jaga-jaga:
+.cinnamon-macos-style-backup/
