@@ -1,75 +1,74 @@
 # cinnamon-macos-style
 
-**Linux Mint Cinnamon dengan nuansa macOS**: tema gelap WhiteSur, Alt+Tab Coverflow, Overview rapi,
-efek *genie* saat minimize, dock yang tersembunyi dengan penanda, terminal bertema, dan gestur
-touchpad. Semuanya dipasang lewat satu skrip yang aman: **bisa disimulasikan dulu, selalu
-mencadangkan, dan bisa dibatalkan penuh**.
+**Linux Mint Cinnamon with a macOS feel**: the WhiteSur dark theme, Coverflow Alt+Tab, a polished
+Overview, a genie minimize effect, an auto-hide dock with a hint line, a themed terminal, and
+touchpad gestures. Everything installs through one safe script: **you can simulate it first, it
+always backs up, and it can be fully undone**.
 
-> **English summary.** A set of scripts and configs that gives Linux Mint Cinnamon a macOS-like
-> look: WhiteSur dark theme, Coverflow Alt+Tab, a polished Overview, genie minimize effect, an
-> auto-hide Plank dock with a hint line, a themed terminal, and touchpad gestures. The installer
-> has a `--dry-run` mode, backs up everything it touches, never uses `sudo` on its own, never
-> downloads anything, and ships with a privacy scanner. Documentation is in Indonesian; the code
-> comments are too, but every command is plain shell and easy to read.
+> **The story behind this setup, and a demo video:** why I went from 8 GB of RAM complaints to a
+> dual boot and then to this desktop, on my blog: **[afrizamuammar.web.id/blog/dual-boot](https://afrizamuammar.web.id/blog/dual-boot)**
+
+> **Note on languages.** This README is in English. The files in `docs/` and the comments in the
+> scripts are in Indonesian, but every command is plain shell and easy to read.
 
 ---
 
-## Tampilan
+## Screenshots
 
-> Semua tangkapan layar memakai wallpaper netral buatan sendiri dan jendela contoh. Tidak ada data
-> pribadi di dalamnya.
+> All screenshots use a neutral wallpaper made for this project and sample windows. They contain
+> no personal data.
 
-**Desktop**: panel ramping di atas, widget Conky transparan, jendela dengan tema WhiteSur-Dark.
+**Desktop**: slim top panel, transparent Conky widgets, windows in the WhiteSur-Dark theme.
 ![Desktop](docs/images/01-desktop.png)
 
-**Alt+Tab Coverflow**: tiap jendela jadi kartu 3D yang berputar.
-![Alt+Tab Coverflow](docs/images/02-alt-tab-coverflow.png)
+**Coverflow Alt+Tab**: every window becomes a rotating 3D card.
+![Coverflow Alt+Tab](docs/images/02-alt-tab-coverflow.png)
 
-**Overview** (geser 3 jari ke atas): semua jendela, label kapsul, bingkai terpilih.
+**Overview** (three-finger swipe up): all windows at once, pill-shaped labels, highlighted frame.
 ![Overview](docs/images/03-overview.png)
 
-**Dock** yang tersembunyi dan muncul saat kursor menyentuh tepi bawah (di desktop kosong, garis
-tipis kecil menandai tempatnya):
+**Dock** that hides and appears when the pointer touches the bottom edge (on an empty desktop, a
+thin line marks where it is):
 ![Dock](docs/images/04-dock.png)
 
-**Efek genie** saat minimize (empat bidikan berurutan, dari kiri atas ke kanan bawah):
+**Genie effect** on minimize (four consecutive frames, from top left to bottom right):
 ![Genie](docs/images/05-genie-minimize.png)
 
-**Terminal** bertema hijau gelap dengan transparansi ringan:
+**Terminal** in a dark green theme with light transparency:
 ![Terminal](docs/images/06-terminal.png)
 
 ---
 
-## Isi paket
+## What's included
 
-| Modul | Yang dilakukan | Perlu |
+| Module | What it does | Needs |
 |---|---|---|
-| `cinnamon` | Tema, ikon, kursor, font Inter, Alt+Tab **Coverflow**, efek jendela, font layar kunci, scroll alami + tap-to-click | tema (lihat [DEPENDENCIES](docs/DEPENDENCIES.md)) |
-| `terminal` | `xfce4-terminal` palet hijau gelap, JetBrains Mono, transparan ringan, tanpa menu/scrollbar | `xfce4-terminal` |
-| `gestures` | Geser 3 jari: atas = **Overview**, bawah = tampilkan desktop, kiri/kanan = Alt+Tab | `touchegg` |
-| `dock` | **Plank** tema MacCard (sembunyi otomatis, zoom) + **penanda dock** (garis tipis di tepi bawah) | `plank`, `wmctrl` |
-| `vscode` | Aksen hijau di VS Code (hanya menggabung warna, pengaturan lain aman) | VS Code |
-| `overview-css` | Overview/Alt+Tab: label kapsul, bingkai terpilih, latar redup | tema WhiteSur |
-| `magiclamp` | Menyetel efek *genie* **bila** ekstensi Magic Lamp sudah Anda pasang | ekstensi (manual) |
-| `panel` *(opsional)* | Satu panel ramping di atas, menggantikan daftar jendela | |
-| `conky` *(opsional)* | Tiga widget transparan di wallpaper (hari + jam, disk/suhu/baterai, RAM) | `conky-all`, 3 font |
+| `cinnamon` | Theme, icons, cursor, Inter font, **Coverflow** Alt+Tab, window effects, lock-screen fonts, natural scrolling + tap-to-click | a theme (see [DEPENDENCIES](docs/DEPENDENCIES.md)) |
+| `terminal` | `xfce4-terminal` with a dark green palette, JetBrains Mono, light transparency, no menu or scrollbar | `xfce4-terminal` |
+| `gestures` | Three-finger swipe: up = **Overview**, down = show desktop, left/right = Alt+Tab | `touchegg` |
+| `dock` | **Plank** with the MacCard theme (auto-hide, zoom) + a **dock hint** (thin line at the bottom edge) | `plank`, `wmctrl` |
+| `vscode` | Green accents for VS Code (only merges colors, your other settings stay untouched) | VS Code |
+| `overview-css` | Overview/Alt+Tab: pill labels, highlighted frame, dimmed background | WhiteSur theme |
+| `magiclamp` | Tunes the *genie* effect **if** you have installed the Magic Lamp extension | extension (manual) |
+| `panel` *(optional)* | One slim panel at the top, replacing the window list | |
+| `conky` *(optional)* | Three transparent wallpaper widgets (day + clock, disk/temperature/battery, RAM) | `conky-all`, 3 fonts |
 
-Yang **tidak** disentuh: GRUB, layar login, berkas di `/etc` atau `/usr`, dan wallpaper Anda.
+**Never touched:** GRUB, the login screen, files under `/etc` or `/usr`, and your wallpaper.
 
-## Persyaratan
+## Requirements
 
-- Linux Mint (Cinnamon **6.x**) di sesi **X11**. Wayland tidak didukung.
-- Touchpad modern (libinput) bila ingin gestur.
-- Diuji pada: **Linux Mint 22.3, Cinnamon 6.6.9, sesi X11**, laptop Intel i3-1215U (grafis Intel UHD),
-  RAM 8 GB. Hanya satu perangkat, jadi perangkat lain mungkin butuh penyesuaian kecil
-  (lihat [TROUBLESHOOTING](docs/TROUBLESHOOTING.md)).
+- Linux Mint (Cinnamon **6.x**) on an **X11** session. Wayland is not supported.
+- A modern touchpad (libinput) if you want the gestures.
+- Tested on: **Linux Mint 22.3, Cinnamon 6.6.9, X11 session**, an Intel i3-1215U laptop
+  (Intel UHD graphics), 8 GB of RAM. That is a single machine, so other hardware may need small
+  adjustments (see [TROUBLESHOOTING](docs/TROUBLESHOOTING.md)).
 
-## Pasang
+## Install
 
-**1. Pasang dulu tema pihak ketiga** (WhiteSur, ikon, kursor, font). Itu tidak diunduh otomatis demi
-keamanan; langkahnya di [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
+**1. Install the third-party themes first** (WhiteSur, icons, cursor, fonts). They are not
+downloaded automatically, for safety; the steps are in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
 
-**2. Ambil repositori dan lihat dulu apa yang akan terjadi (tidak mengubah apa pun):**
+**2. Clone the repository and preview what would happen (changes nothing):**
 
 ```bash
 git clone https://github.com/afrizaaa017/cinnamon-macos-style.git
@@ -77,63 +76,64 @@ cd cinnamon-macos-style
 ./install.sh --dry-run all
 ```
 
-**3. Pasang.** Skrip bertanya sebelum mulai, mencadangkan semuanya, dan hanya menjalankan
-`sudo apt install` bila Anda mengetik `y`:
+**3. Install.** The script asks before it starts, backs everything up, and only runs
+`sudo apt install` if you type `y`:
 
 ```bash
-./install.sh                 # modul bawaan
-./install.sh all             # termasuk panel dan conky (opsional)
-./install.sh gestures dock   # modul tertentu saja
+./install.sh                 # default modules
+./install.sh all             # including the optional panel and conky
+./install.sh gestures dock   # specific modules only
 ```
 
-**4. Logout lalu login lagi** agar font, tema, dan autostart berlaku penuh.
+**4. Log out and back in** so fonts, themes, and autostart entries fully apply.
 
-### Pasang ekstensi genie (manual, sengaja)
+### Installing the genie extension (manual, on purpose)
 
-Efek minimize ala macOS berasal dari ekstensi komunitas **Magic Lamp Effect**. Itu kode pihak
-ketiga yang berjalan di dalam desktop Anda, jadi tidak dipasang otomatis. Cara dan peringatan
-lengkap ada di [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md#magic-lamp-effect-genie). Setelah
-terpasang dan diaktifkan sekali, jalankan `./install.sh magiclamp` untuk menyetel durasinya.
+The macOS-style minimize effect comes from the community extension **Magic Lamp Effect**. It is
+third-party code that runs inside your desktop, so it is not installed automatically. Full steps
+and warnings are in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md#magic-lamp-effect-genie). Once it
+is installed and enabled, run `./install.sh magiclamp` to set its duration.
 
-## Membatalkan
+## Uninstall
 
 ```bash
-./uninstall.sh --list   # daftar cadangan
-./uninstall.sh          # pulihkan dari cadangan terbaru (Anda melihat isinya dulu sebelum jalan)
+./uninstall.sh --list   # list backups
+./uninstall.sh          # restore from the latest backup (you see its contents before it runs)
 ```
 
-Pembatalan mengembalikan nilai gsettings lama, berkas yang tertimpa, dan menghapus berkas yang
-dibuat pemasang. Paket apt yang Anda pasang sendiri tidak dihapus.
+Uninstalling restores the old gsettings values and any overwritten files, and removes the files
+the installer created. Packages you installed with apt are not removed.
 
-## Penyesuaian cepat
+## Quick tweaks
 
-| Ingin mengubah | Caranya |
+| To change | How |
 |---|---|
-| Ikon lain | `ICON_THEME=Yaru ./install.sh cinnamon` |
-| Transparansi terminal | `KEPEKATAN=0.85 ./install.sh terminal` (1.0 = pekat, 0.5 = sangat tembus) |
-| Kecepatan efek genie | Pengaturan Sistem > Ekstensi > Magic Lamp (durasi, jenis efek) |
-| Lebar/ketebalan garis penanda dock | konstanta `W, H, GAP, ALPHA` di `~/.local/bin/dock-hint.py` |
-| Aksen warna | `#6fcf97` di `files/vscode-colors.json`, `modules/20-terminal.sh`, `files/overview.css` |
+| Another icon theme | `ICON_THEME=Yaru ./install.sh cinnamon` |
+| Terminal transparency | `KEPEKATAN=0.85 ./install.sh terminal` (1.0 = opaque, 0.5 = very transparent) |
+| Genie effect speed | System Settings > Extensions > Magic Lamp (duration, effect type) |
+| Width/thickness of the dock hint line | the constants `W, H, GAP, ALPHA` in `~/.local/bin/dock-hint.py` |
+| Accent color | `#6fcf97` in `files/vscode-colors.json`, `modules/20-terminal.sh`, `files/overview.css` |
 
-## Berat atau ringan?
+## Light or heavy?
 
-Cinnamon memakai kira-kira dua kali lipat RAM XFCE (sekitar 700 MB berbanding 250 MB pada
-laptop penulis, i3-1215U / RAM 8 GB). Efek genie, Coverflow, dan Overview tidak menambah beban
-saat desktop diam.
+Cinnamon uses roughly twice the RAM of XFCE (about 700 MB versus 250 MB on the author's laptop,
+an i3-1215U with 8 GB of RAM). The genie effect, Coverflow, and Overview add no load while the
+desktop is idle.
 
-## Privasi dan keamanan
+## Privacy and security
 
-- Pemasang **tidak mengirim data apa pun** dan **tidak mengunduh apa pun**.
-- Pemasang tidak memakai `sudo` sendiri. `apt` hanya jalan bila Anda mengetik `y`.
-- Semua perubahan dicadangkan di `~/.cinnamon-macos-style-backup/` (hanya terbaca oleh Anda).
-- Ingin memeriksa sebelum percaya? Seluruh logikanya ada di `install.sh` dan `modules/*.sh`,
-  berupa shell biasa dengan komentar.
-- Hendak membagikan hasil modifikasi Anda sendiri? Jalankan `./tools/cek-privasi.sh` dulu dan
-  baca [docs/PUBLISH.md](docs/PUBLISH.md).
+- The installer **sends no data anywhere** and **downloads nothing**.
+- The installer never uses `sudo` on its own. `apt` only runs if you type `y`.
+- Every change is backed up in `~/.cinnamon-macos-style-backup/` (readable only by you).
+- Want to check before you trust it? All the logic is in `install.sh` and `modules/*.sh`, plain
+  shell with comments.
+- Sharing your own modified version? Run `./tools/cek-privasi.sh` first and read
+  [docs/PUBLISH.md](docs/PUBLISH.md).
 
-## Kredit dan lisensi
+## Credits and license
 
-Skrip dan konfigurasi di repositori ini berlisensi MIT (lihat [LICENSE](LICENSE)). Tema, ikon,
-kursor, font, dan ekstensi yang dirujuk adalah karya pihak lain dengan lisensi masing-masing;
-daftar dan tautannya ada di [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md). Terima kasih kepada
-pembuat WhiteSur, Papirus, Bibata, Inter, JetBrains Mono, Plank, Touchégg, dan Magic Lamp Effect.
+The scripts and configuration in this repository are licensed under the MIT license (see
+[LICENSE](LICENSE)). The themes, icons, cursors, fonts, and extensions it refers to are the work
+of others, under their own licenses; the list and links are in
+[docs/DEPENDENCIES.md](docs/DEPENDENCIES.md). Thanks to the authors of WhiteSur, Papirus, Bibata,
+Inter, JetBrains Mono, Plank, Touchégg, and Magic Lamp Effect.
